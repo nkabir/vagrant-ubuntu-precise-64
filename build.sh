@@ -15,9 +15,10 @@ set -o errexit
 
 # Configurations
 BOX="ubuntu-precise-64"
-BASE_NAME="ubuntu-12.04-alternate-amd64.iso"
-ISO_URL="http://releases.ubuntu.com/precise/$BASE_NAME.torrent"
-ISO_MD5="9fcc322536575dda5879c279f0b142d7"
+BASE_NAME="ubuntu-12.04.2-alternate-amd64.iso"
+ISO_URL="http://releases.ubuntu.com/precise/$BASE_NAME"
+#ISO_MD5="9fcc322536575dda5879c279f0b142d7"
+ISO_MD5="cff39ccc589c7797aacce9efee7b5f93"
 
 # location, location, location
 FOLDER_BASE=`pwd`
@@ -55,7 +56,8 @@ fi
 # download the installation disk if you haven't already or it is corrupted somehow
 if [ ! -e "${ISO_FILENAME}" ]; then
   echo "Downloading `basename ${ISO_URL}` ..."
-  transmission-cli --download-dir "${FOLDER_ISO}" "${ISO_URL}"
+  #transmission-cli --download-dir "${FOLDER_ISO}" "${ISO_URL}"
+  curl -o "${FOLDER_ISO}/${BASE_NAME}" "${ISO_URL}"
 
   # make sure download is right...
   ISO_HASH=`md5sum "${ISO_FILENAME}" | cut -d" " -f 1`
